@@ -194,6 +194,7 @@ int generic_greedy_coloring(std::vector<Vertex>& vertices, int num_vertices, con
             if (best_vertex_for_this_iteration == nullptr ||
                 v_ptr->heuristic_value > best_vertex_for_this_iteration->heuristic_value ||
                 (v_ptr->heuristic_value == best_vertex_for_this_iteration->heuristic_value && v_ptr->degree > best_vertex_for_this_iteration->degree)) {
+                
                 best_vertex_for_this_iteration = v_ptr;
             }
         }
@@ -331,8 +332,8 @@ int RLF_coloring(std::vector<Vertex>& vertices, int num_vertices) {
 int main() {
     // Define the folder where the graph files are located
     const std::string graph_folder = "DIMACS_Graphs_Instances/";
+    const std::string log_filename = "results.log";
 
-    // List of all specified filenames to process
     std::vector<std::string> filenames = {
         "dsjc250.5.col",
         "dsjc500.1.col",
@@ -355,30 +356,41 @@ int main() {
         // "C4000.5.col",
     };
 
+    std::ofstream log_file(log_filename, std::ios_base::app);
+    if (!log_file.is_open()) {
+        std::cerr << "Error: Could not open log file '" << log_filename << "'" << std::endl;
+        return 1; 
+    }
+
+    log_file << "--- Graph Coloring Algorithms Comparison Session Start: " << std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()) << " ---" << std::endl;
+    std::cout << "--- Graph Coloring Algorithms Comparison ---" << std::endl;
+
     // A single vector to reuse for graph data to save memory,
     // cleared and resized for each new graph.
     std::vector<Vertex> vertices_storage;
     int num_vertices_current = 0;
     int num_edges_current = 0;
 
-    std::cout << "--- Graph Coloring Algorithms Comparison ---" << std::endl;
-
     for (const std::string& filename : filenames) {
         // Construct the full path to the graph file
         std::string full_path_filename = graph_folder + filename;
 
         std::cout << "\nProcessing graph file: '" << full_path_filename << "'" << std::endl;
+        log_file << "\nProcessing graph file: '" << full_path_filename << "'" << std::endl;
 
         // Attempt to read the graph file
         if (!readGraphFile(full_path_filename, vertices_storage, num_vertices_current, num_edges_current)) {
             std::cerr << "Failed to read graph from '" << full_path_filename << "'. Skipping." << std::endl;
+            log_file << "Failed to read graph from '" << full_path_filename << "'. Skipping." << std::endl;
             continue; // Move to the next file in the list
         }
 
         std::cout << "  Graph loaded: " << num_vertices_current << " vertices, " << num_edges_current << " edges." << std::endl;
+        log_file << "  Graph loaded: " << num_vertices_current << " vertices, " << num_edges_current << " edges." << std::endl;
 
         // --- Run IDO Algorithm ---
         std::cout << "\n  Algorithm: IDO" << std::endl;
+        log_file << "\n  Algorithm: IDO" << std::endl;
         auto start_time_ido = std::chrono::high_resolution_clock::now();
         int colors_used_ido = IDO_coloring(vertices_storage, num_vertices_current);
         auto end_time_ido = std::chrono::high_resolution_clock::now();
@@ -386,9 +398,12 @@ int main() {
 
         std::cout << "    Colors Used: " << colors_used_ido << std::endl;
         std::cout << "    CPU Time:    " << elapsed_milliseconds_ido.count() << " ms" << std::endl;
+        log_file << "    Colors Used: " << colors_used_ido << std::endl;
+        log_file << "    CPU Time:    " << elapsed_milliseconds_ido.count() << " ms" << std::endl;
 
         // --- Run DSATUR Algorithm ---
         std::cout << "\n  Algorithm: DSATUR" << std::endl;
+        log_file << "\n  Algorithm: DSATUR" << std::endl;
         auto start_time_dsatur = std::chrono::high_resolution_clock::now();
         int colors_used_dsatur = DSATUR_coloring(vertices_storage, num_vertices_current);
         auto end_time_dsatur = std::chrono::high_resolution_clock::now();
@@ -396,9 +411,12 @@ int main() {
 
         std::cout << "    Colors Used: " << colors_used_dsatur << std::endl;
         std::cout << "    CPU Time:    " << elapsed_milliseconds_dsatur.count() << " ms" << std::endl;
+        log_file << "    Colors Used: " << colors_used_dsatur << std::endl;
+        log_file << "    CPU Time:    " << elapsed_milliseconds_dsatur.count() << " ms" << std::endl;
 
         // --- Run RLF Algorithm ---
         std::cout << "\n  Algorithm: RLF" << std::endl;
+        log_file << "\n  Algorithm: RLF" << std::endl;
         auto start_time_rlf = std::chrono::high_resolution_clock::now();
         int colors_used_rlf = RLF_coloring(vertices_storage, num_vertices_current);
         auto end_time_rlf = std::chrono::high_resolution_clock::now();
@@ -406,21 +424,16 @@ int main() {
 
         std::cout << "    Colors Used: " << colors_used_rlf << std::endl;
         std::cout << "    CPU Time:    " << elapsed_milliseconds_rlf.count() << " ms" << std::endl;
-
-
-        // Optional: Print detailed coloring for smaller graphs (commented out for large graphs)
-        /*
-        // NOTE: If you uncomment this, the colors printed will be from the LAST algorithm run (RLF in this case).
-        if (num_vertices_current <= 50) { // Example: Only print for graphs with 50 or fewer vertices
-            std::cout << "\n  Detailed coloring (from RLF run):" << std::endl;
-            for (int i = 1; i <= num_vertices_current; ++i) {
-                std::cout << "    Vertex " << vertices_storage[i].id << ": Color " << vertices_storage[i].color << std::endl;
-            }
-        }
-        */
+        log_file << "    Colors Used: " << colors_used_rlf << std::endl;
+        log_file << "    CPU Time:    " << elapsed_milliseconds_rlf.count() << " ms" << std::endl;
     }
 
+    // Final message to log file and console
+    log_file << "\n--- All specified files processed ---" << std::endl;
+    log_file << "--- Graph Coloring Algorithms Comparison Session End: " << std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()) << " ---" << std::endl;
     std::cout << "\n--- All specified files processed ---" << std::endl;
+
+    log_file.close();
 
     return 0;
 }

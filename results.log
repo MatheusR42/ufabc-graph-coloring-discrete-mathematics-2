@@ -1,0 +1,34 @@
+--- Graph Coloring Algorithms Comparison Session Start: 1752124488 ---
+
+Processing graph file: 'DIMACS_Graphs_Instances/dsjc250.5.col'
+  Graph loaded: 250 vertices, 31336 edges.
+
+  Algorithm: IDO
+    Colors Used: 41
+    CPU Time:    38.5615 ms
+
+  Algorithm: DSATUR
+    Colors Used: 36
+    CPU Time:    220.28 ms
+
+  Algorithm: RLF
+    Colors Used: 39
+    CPU Time:    19.1365 ms
+
+Processing graph file: 'DIMACS_Graphs_Instances/dsjc500.1.col'
+  Graph loaded: 500 vertices, 12458 edges.
+
+  Algorithm: IDO
+    Colors Used: 19
+    CPU Time:    64.0552 ms
+
+  Algorithm: DSATUR
+    Colors Used: 16
+    CPU Time:    305.385 ms
+
+  Algorithm: RLF
+    Colors Used: 17
+    CPU Time:    57.9571 ms
+
+--- All specified files processed ---
+--- Graph Coloring Algorithms Comparison Session End: 1752124489 ---
