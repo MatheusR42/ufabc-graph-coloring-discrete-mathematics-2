@@ -1,34 +1,515 @@
---- Graph Coloring Algorithms Comparison Session Start: 1752124488 ---
-
 Processing graph file: 'DIMACS_Graphs_Instances/dsjc250.5.col'
   Graph loaded: 250 vertices, 31336 edges.
 
+  Algorithm: FF
+    Colors Used: 43
+    CPU Time:    0.461498 ms
+
+  Algorithm: WP
+    Colors Used: 39
+    CPU Time:    3.267 ms
+
+  Algorithm: LDO
+    Colors Used: 40
+    CPU Time:    0.59015 ms
+
   Algorithm: IDO
     Colors Used: 41
-    CPU Time:    38.5615 ms
+    CPU Time:    26.6204 ms
 
   Algorithm: DSATUR
     Colors Used: 36
-    CPU Time:    220.28 ms
+    CPU Time:    152.555 ms
 
   Algorithm: RLF
     Colors Used: 39
-    CPU Time:    19.1365 ms
+    CPU Time:    11.5286 ms
 
 Processing graph file: 'DIMACS_Graphs_Instances/dsjc500.1.col'
   Graph loaded: 500 vertices, 12458 edges.
 
+  Algorithm: FF
+    Colors Used: 20
+    CPU Time:    0.413792 ms
+
+  Algorithm: WP
+    Colors Used: 18
+    CPU Time:    5.78762 ms
+
+  Algorithm: LDO
+    Colors Used: 18
+    CPU Time:    0.546339 ms
+
   Algorithm: IDO
     Colors Used: 19
-    CPU Time:    64.0552 ms
+    CPU Time:    40.888 ms
 
   Algorithm: DSATUR
     Colors Used: 16
-    CPU Time:    305.385 ms
+    CPU Time:    203.691 ms
 
   Algorithm: RLF
     Colors Used: 17
-    CPU Time:    57.9571 ms
+    CPU Time:    32.638 ms
+
+Processing graph file: 'DIMACS_Graphs_Instances/dsjc500.5.col'
+  Graph loaded: 500 vertices, 62624 edges.
+
+  Algorithm: FF
+    Colors Used: 72
+    CPU Time:    1.66734 ms
+
+  Algorithm: WP
+    Colors Used: 70
+    CPU Time:    19.3365 ms
+
+  Algorithm: LDO
+    Colors Used: 69
+    CPU Time:    2.16619 ms
+
+  Algorithm: IDO
+    Colors Used: 70
+    CPU Time:    208.454 ms
+
+  Algorithm: DSATUR
+    Colors Used: 65
+    CPU Time:    1300.28 ms
+
+  Algorithm: RLF
+    Colors Used: 66
+    CPU Time:    79.983 ms
+
+Processing graph file: 'DIMACS_Graphs_Instances/dsjc500.9.col'
+  Graph loaded: 500 vertices, 224874 edges.
+
+  Algorithm: FF
+    Colors Used: 175
+    CPU Time:    3.43737 ms
+
+  Algorithm: WP
+    Colors Used: 173
+    CPU Time:    37.8718 ms
+
+  Algorithm: LDO
+    Colors Used: 168
+    CPU Time:    3.84476 ms
+
+  Algorithm: IDO
+    Colors Used: 176
+    CPU Time:    361.172 ms
+
+  Algorithm: DSATUR
+    Colors Used: 161
+    CPU Time:    2690.04 ms
+
+  Algorithm: RLF
+    Colors Used: 161
+    CPU Time:    39.7867 ms
+
+Processing graph file: 'DIMACS_Graphs_Instances/dsjc1000.1.col'
+  Graph loaded: 1000 vertices, 49629 edges.
+
+  Algorithm: FF
+    Colors Used: 31
+    CPU Time:    1.54509 ms
+
+  Algorithm: WP
+    Colors Used: 29
+    CPU Time:    35.2632 ms
+
+  Algorithm: LDO
+    Colors Used: 30
+    CPU Time:    1.91882 ms
+
+  Algorithm: IDO
+    Colors Used: 30
+    CPU Time:    317.611 ms
+
+  Algorithm: DSATUR
+    Colors Used: 26
+    CPU Time:    1774.62 ms
+
+  Algorithm: RLF
+    Colors Used: 28
+    CPU Time:    217.682 ms
+
+Processing graph file: 'DIMACS_Graphs_Instances/r250.5.col'
+  Graph loaded: 250 vertices, 14849 edges.
+
+  Algorithm: FF
+    Colors Used: 79
+    CPU Time:    0.530758 ms
+
+  Algorithm: WP
+    Colors Used: 71
+    CPU Time:    3.72793 ms
+
+  Algorithm: LDO
+    Colors Used: 71
+    CPU Time:    0.640986 ms
+
+  Algorithm: IDO
+    Colors Used: 69
+    CPU Time:    21.7676 ms
+
+  Algorithm: DSATUR
+    Colors Used: 67
+    CPU Time:    147.252 ms
+
+  Algorithm: RLF
+    Colors Used: 71
+    CPU Time:    6.22011 ms
+
+Processing graph file: 'DIMACS_Graphs_Instances/r1000.1c.col'
+  Graph loaded: 1000 vertices, 485090 edges.
+
+  Algorithm: FF
+    Colors Used: 138
+    CPU Time:    12.2756 ms
+
+  Algorithm: WP
+    Colors Used: 117
+    CPU Time:    86.6595 ms
+
+  Algorithm: LDO
+    Colors Used: 117
+    CPU Time:    14.7236 ms
+
+  Algorithm: IDO
+    Colors Used: 124
+    CPU Time:    2874.88 ms
+
+  Algorithm: DSATUR
+    Colors Used: 106
+    CPU Time:    22915 ms
+
+  Algorithm: RLF
+    Colors Used: 112
+    CPU Time:    131.086 ms
+
+Processing graph file: 'DIMACS_Graphs_Instances/r1000.5.col'
+  Graph loaded: 1000 vertices, 238267 edges.
+
+  Algorithm: FF
+    Colors Used: 275
+    CPU Time:    7.80973 ms
+
+  Algorithm: WP
+    Colors Used: 259
+    CPU Time:    141.218 ms
+
+  Algorithm: LDO
+    Colors Used: 259
+    CPU Time:    9.28627 ms
+
+  Algorithm: IDO
+    Colors Used: 250
+    CPU Time:    1412.7 ms
+
+  Algorithm: DSATUR
+    Colors Used: 250
+    CPU Time:    11284.9 ms
+
+  Algorithm: RLF
+    Colors Used: 257
+    CPU Time:    332.998 ms
+
+Processing graph file: 'DIMACS_Graphs_Instances/dsjr500.1c.col'
+  Graph loaded: 500 vertices, 121275 edges.
+
+  Algorithm: FF
+    Colors Used: 109
+    CPU Time:    3.04878 ms
+
+  Algorithm: WP
+    Colors Used: 98
+    CPU Time:    19.644 ms
+
+  Algorithm: LDO
+    Colors Used: 99
+    CPU Time:    3.73769 ms
+
+  Algorithm: IDO
+    Colors Used: 101
+    CPU Time:    344.984 ms
+
+  Algorithm: DSATUR
+    Colors Used: 87
+    CPU Time:    5907.98 ms
+
+  Algorithm: RLF
+    Colors Used: 95
+    CPU Time:    19.7437 ms
+
+Processing graph file: 'DIMACS_Graphs_Instances/dsjr500.5.col'
+  Graph loaded: 500 vertices, 58862 edges.
+
+  Algorithm: FF
+    Colors Used: 143
+    CPU Time:    1.91844 ms
+
+  Algorithm: WP
+    Colors Used: 133
+    CPU Time:    21.821 ms
+
+  Algorithm: LDO
+    Colors Used: 133
+    CPU Time:    2.58678 ms
+
+  Algorithm: IDO
+    Colors Used: 129
+    CPU Time:    173.954 ms
+
+  Algorithm: DSATUR
+    Colors Used: 131
+    CPU Time:    1274.91 ms
+
+  Algorithm: RLF
+    Colors Used: 133
+    CPU Time:    53.6041 ms
+
+Processing graph file: 'DIMACS_Graphs_Instances/le450_25c.col'
+  Graph loaded: 450 vertices, 17343 edges.
+
+  Algorithm: FF
+    Colors Used: 37
+    CPU Time:    0.552023 ms
+
+  Algorithm: WP
+    Colors Used: 31
+    CPU Time:    5.47861 ms
+
+  Algorithm: LDO
+    Colors Used: 31
+    CPU Time:    0.839012 ms
+
+  Algorithm: IDO
+    Colors Used: 30
+    CPU Time:    42.3167 ms
+
+  Algorithm: DSATUR
+    Colors Used: 29
+    CPU Time:    267.444 ms
+
+  Algorithm: RLF
+    Colors Used: 30
+    CPU Time:    24.7137 ms
+
+Processing graph file: 'DIMACS_Graphs_Instances/le450_25d.col'
+  Graph loaded: 450 vertices, 17425 edges.
+
+  Algorithm: FF
+    Colors Used: 35
+    CPU Time:    0.533585 ms
+
+  Algorithm: WP
+    Colors Used: 31
+    CPU Time:    5.5972 ms
+
+  Algorithm: LDO
+    Colors Used: 30
+    CPU Time:    0.686922 ms
+
+  Algorithm: IDO
+    Colors Used: 31
+    CPU Time:    43.6053 ms
+
+  Algorithm: DSATUR
+    Colors Used: 28
+    CPU Time:    266.828 ms
+
+  Algorithm: RLF
+    Colors Used: 30
+    CPU Time:    25.417 ms
+
+Processing graph file: 'DIMACS_Graphs_Instances/flat300_28_0.col'
+  Graph loaded: 300 vertices, 21695 edges.
+
+  Algorithm: FF
+    Colors Used: 46
+    CPU Time:    0.60098 ms
+
+  Algorithm: WP
+    Colors Used: 45
+    CPU Time:    4.98807 ms
+
+  Algorithm: LDO
+    Colors Used: 46
+    CPU Time:    0.81819 ms
+
+  Algorithm: IDO
+    Colors Used: 49
+    CPU Time:    41.5852 ms
+
+  Algorithm: DSATUR
+    Colors Used: 42
+    CPU Time:    253.835 ms
+
+  Algorithm: RLF
+    Colors Used: 42
+    CPU Time:    20.0584 ms
+
+Processing graph file: 'DIMACS_Graphs_Instances/flat1000_50_0.col'
+  Graph loaded: 1000 vertices, 245000 edges.
+
+  Algorithm: FF
+    Colors Used: 126
+    CPU Time:    6.27939 ms
+
+  Algorithm: WP
+    Colors Used: 124
+    CPU Time:    121.304 ms
+
+  Algorithm: LDO
+    Colors Used: 121
+    CPU Time:    7.87354 ms
+
+  Algorithm: IDO
+    Colors Used: 122
+    CPU Time:    1574.09 ms
+
+  Algorithm: DSATUR
+    Colors Used: 113
+    CPU Time:    10845.9 ms
+
+  Algorithm: RLF
+    Colors Used: 114
+    CPU Time:    559.298 ms
+
+Processing graph file: 'DIMACS_Graphs_Instances/flat1000_60_0.col'
+  Graph loaded: 1000 vertices, 245830 edges.
+
+  Algorithm: FF
+    Colors Used: 125
+    CPU Time:    6.3172 ms
+
+  Algorithm: WP
+    Colors Used: 122
+    CPU Time:    123.367 ms
+
+  Algorithm: LDO
+    Colors Used: 124
+    CPU Time:    8.45238 ms
+
+  Algorithm: IDO
+    Colors Used: 123
+    CPU Time:    1590.94 ms
+
+  Algorithm: DSATUR
+    Colors Used: 114
+    CPU Time:    10856.2 ms
+
+  Algorithm: RLF
+    Colors Used: 114
+    CPU Time:    549.013 ms
+
+Processing graph file: 'DIMACS_Graphs_Instances/flat1000_76_0.col'
+  Graph loaded: 1000 vertices, 246708 edges.
+
+  Algorithm: FF
+    Colors Used: 122
+    CPU Time:    6.49314 ms
+
+  Algorithm: WP
+    Colors Used: 123
+    CPU Time:    121.882 ms
+
+  Algorithm: LDO
+    Colors Used: 123
+    CPU Time:    8.03163 ms
+
+  Algorithm: IDO
+    Colors Used: 125
+    CPU Time:    1594.31 ms
+
+  Algorithm: DSATUR
+    Colors Used: 114
+    CPU Time:    14485.8 ms
+
+  Algorithm: RLF
+    Colors Used: 116
+    CPU Time:    561.16 ms
+
+Processing graph file: 'DIMACS_Graphs_Instances/latin_square.col'
+  Graph loaded: 900 vertices, 307350 edges.
+
+  Algorithm: FF
+    Colors Used: 213
+    CPU Time:    8.11931 ms
+
+  Algorithm: WP
+    Colors Used: 159
+    CPU Time:    68.2172 ms
+
+  Algorithm: LDO
+    Colors Used: 155
+    CPU Time:    8.32402 ms
+
+  Algorithm: IDO
+    Colors Used: 147
+    CPU Time:    1082.77 ms
+
+  Algorithm: DSATUR
+    Colors Used: 133
+    CPU Time:    11118.4 ms
+
+  Algorithm: RLF
+    Colors Used: 212
+    CPU Time:    411.042 ms
+
+Processing graph file: 'DIMACS_Graphs_Instances/C2000.5.col'
+  Graph loaded: 2000 vertices, 999836 edges.
+
+  Algorithm: FF
+    Colors Used: 226
+    CPU Time:    26.1012 ms
+
+  Algorithm: WP
+    Colors Used: 218
+    CPU Time:    852.573 ms
+
+  Algorithm: LDO
+    Colors Used: 222
+    CPU Time:    32.6782 ms
+
+  Algorithm: IDO
+    Colors Used: 222
+    CPU Time:    17220.2 ms
+
+  Algorithm: DSATUR
+    Colors Used: 206
+    CPU Time:    104487 ms
+
+  Algorithm: RLF
+    Colors Used: 210
+    CPU Time:    3977.5 ms
+
+Processing graph file: 'DIMACS_Graphs_Instances/C4000.5.col'
+  Graph loaded: 4000 vertices, 4000268 edges.
+
+  Algorithm: FF
+    Colors Used: 402
+    CPU Time:    104.608 ms
+
+  Algorithm: WP
+    Colors Used: 395
+    CPU Time:    6155.14 ms
+
+  Algorithm: LDO
+    Colors Used: 396
+    CPU Time:    127.792 ms
+
+  Algorithm: IDO
+    Colors Used: 403
+    CPU Time:    119326 ms
+
+  Algorithm: DSATUR
+    Colors Used: 379
+    CPU Time:    875007 ms
+
+  Algorithm: RLF
+    Colors Used: 376
+    CPU Time:    31755.6 ms
 
 --- All specified files processed ---
---- Graph Coloring Algorithms Comparison Session End: 1752124489 ---
+--- Graph Coloring Algorithms Comparison Session End: 1752199887 ---

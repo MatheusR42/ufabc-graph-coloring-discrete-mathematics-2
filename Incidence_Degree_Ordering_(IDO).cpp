@@ -328,6 +328,189 @@ int RLF_coloring(std::vector<Vertex>& vertices, int num_vertices) {
     return current_color; 
 }
 
+// Implementation of the First Fit Graph Coloring Algorithm
+int FirstFit_coloring(std::vector<Vertex>& vertices, int num_vertices) {
+    // Reset all vertex colors at the start of First Fit run
+    for (int i = 1; i <= num_vertices; ++i) {
+        vertices[i].color = -1;
+    }
+
+    // Assign the first color to the first vertex (color 0)
+    vertices[1].color = 0;
+    int max_color_used = 0;
+
+    // Iterate through the remaining vertices
+    for (int u = 2; u <= num_vertices; ++u) {
+        // Create a boolean array to keep track of available colors for vertex u
+        // availableColors[i] = true if color i is available, false otherwise
+        std::vector<bool> available_colors(num_vertices, true); 
+
+        // Check colors of adjacent vertices and mark them as unavailable
+        for (int neighbor_id : vertices[u].neighbors) {
+            if (vertices[neighbor_id].color != -1) {
+                available_colors[vertices[neighbor_id].color] = false;
+            }
+        }
+
+        // Find the smallest available color
+        int color;
+        for (color = 0; color < num_vertices; ++color) {
+            if (available_colors[color]) {
+                break;
+            }
+        }
+        
+        vertices[u].color = color; // Assign the found color to vertex u
+        
+        // Update max color used
+        if (color > max_color_used) {
+            max_color_used = color;
+        }
+    }
+
+    return max_color_used + 1; // Return the total number of colors used (colors are 0-indexed)
+}
+
+// Implementation of the Welsh-Powell Graph Coloring Algorithm
+int WelshPowell_coloring(std::vector<Vertex>& vertices, int num_vertices) {
+    // Reset all vertex colors at the start of Welsh-Powell run
+    for (int i = 1; i <= num_vertices; ++i) {
+        vertices[i].color = -1;
+    }
+
+    std::vector<bool> colored(num_vertices + 1, false); // To control which vertices have been colored
+    int current_color = 0;
+
+    while (true) {
+        bool all_colored = true;
+        std::vector<int> current_group; // Vertices that will receive the current_color
+
+        // Find the first uncolored vertex with the highest degree
+        int start_vertex = -1;
+        int max_degree = -1;
+        
+        for (int i = 1; i <= num_vertices; ++i) {
+            if (!colored[i] && vertices[i].degree > max_degree) {
+                start_vertex = i;
+                max_degree = vertices[i].degree;
+                all_colored = false;
+            }
+        }
+
+        if (all_colored) {
+            break; // All vertices have been colored
+        }
+
+        // Assign current_color to start_vertex and add it to the group
+        vertices[start_vertex].color = current_color;
+        colored[start_vertex] = true;
+        current_group.push_back(start_vertex);
+
+        // Go through uncolored vertices (in order of degree)
+        // Create a list of vertices sorted by degree for this iteration
+        std::vector<std::pair<int, int>> vertex_degree_pairs; // (vertex_id, degree)
+        for (int i = 1; i <= num_vertices; ++i) {
+            if (!colored[i]) {
+                vertex_degree_pairs.push_back({i, vertices[i].degree});
+            }
+        }
+        
+        // Sort by degree in descending order
+        std::sort(vertex_degree_pairs.begin(), vertex_degree_pairs.end(),
+                  [](const std::pair<int, int>& a, const std::pair<int, int>& b) {
+                      return a.second > b.second;
+                  });
+
+        // Check each uncolored vertex
+        for (const auto& vd_candidate : vertex_degree_pairs) {
+            int candidate_vertex = vd_candidate.first;
+            if (!colored[candidate_vertex]) {
+                bool can_assign_color = true;
+                
+                // Check if candidate_vertex is adjacent to any vertex in current_group
+                for (int colored_vertex_in_group : current_group) {
+                    // Check if candidate_vertex is adjacent to colored_vertex_in_group
+                    bool is_adjacent = false;
+                    for (int neighbor_id : vertices[candidate_vertex].neighbors) {
+                        if (neighbor_id == colored_vertex_in_group) {
+                            is_adjacent = true;
+                            break;
+                        }
+                    }
+                    if (is_adjacent) {
+                        can_assign_color = false;
+                        break;
+                    }
+                }
+                
+                if (can_assign_color) {
+                    // If not adjacent, assign the same color and add to group
+                    vertices[candidate_vertex].color = current_color;
+                    colored[candidate_vertex] = true;
+                    current_group.push_back(candidate_vertex);
+                }
+            }
+        }
+        current_color++; // Move to the next color
+    }
+
+    return current_color; // Return the total number of colors used
+}
+
+// Implementation of the Largest Degree Ordering (LDO) Graph Coloring Algorithm
+int LargestDegreeOrdering_coloring(std::vector<Vertex>& vertices, int num_vertices) {
+    // Reset all vertex colors at the start of LDO run
+    for (int i = 1; i <= num_vertices; ++i) {
+        vertices[i].color = -1;
+    }
+
+    // Create a list of vertices sorted by degree in descending order
+    std::vector<std::pair<int, int>> vertex_degree_pairs; // (vertex_id, degree)
+    for (int i = 1; i <= num_vertices; ++i) {
+        vertex_degree_pairs.push_back({i, vertices[i].degree});
+    }
+    
+    // Sort by degree in descending order
+    std::sort(vertex_degree_pairs.begin(), vertex_degree_pairs.end(),
+              [](const std::pair<int, int>& a, const std::pair<int, int>& b) {
+                  return a.second > b.second;
+              });
+
+    int max_color_used = -1;
+
+    // Color vertices in the order determined by degree
+    for (const auto& vd : vertex_degree_pairs) {
+        int u = vd.first; // The vertex to be colored
+
+        // Vector to track available colors for vertex u
+        // availableColors[i] = true if color i is available, false otherwise
+        std::vector<bool> available_colors(num_vertices, true);
+
+        // Check colors of u's neighbors that are already colored
+        for (int neighbor_id : vertices[u].neighbors) {
+            if (vertices[neighbor_id].color != -1) { // If neighbor is already colored
+                available_colors[vertices[neighbor_id].color] = false; // Mark neighbor's color as unavailable for u
+            }
+        }
+
+        // Find the smallest available color
+        int color;
+        for (color = 0; color < num_vertices; ++color) {
+            if (available_colors[color]) {
+                break;
+            }
+        }
+        
+        vertices[u].color = color; // Assign the found color to vertex u
+        
+        // Update max color used
+        if (color > max_color_used) {
+            max_color_used = color;
+        }
+    }
+
+    return max_color_used + 1; // Return the total number of colors used (colors are 0-indexed)
+}
 
 int main() {
     // Define the folder where the graph files are located
@@ -337,23 +520,23 @@ int main() {
     std::vector<std::string> filenames = {
         "dsjc250.5.col",
         "dsjc500.1.col",
-        // "dsjc500.5.col",
-        // "dsjc500.9.col",
-        // "dsjc1000.1.col",
-        // "r250.5.col",
-        // "r1000.1c.col",
-        // "r1000.5.col",
-        // "dsjr500.1c.col",
-        // "dsjr500.5.col",
-        // "le450_25c.col",
-        // "le450_25d.col",
-        // "flat300_28_0.col",
-        // "flat1000_50_0.col",
-        // "flat1000_60_0.col",
-        // "flat1000_76_0.col",
-        // "latin_square.col",
-        // "C2000.5.col",
-        // "C4000.5.col",
+        "dsjc500.5.col",
+        "dsjc500.9.col",
+        "dsjc1000.1.col",
+        "r250.5.col",
+        "r1000.1c.col",
+        "r1000.5.col",
+        "dsjr500.1c.col",
+        "dsjr500.5.col",
+        "le450_25c.col",
+        "le450_25d.col",
+        "flat300_28_0.col",
+        "flat1000_50_0.col",
+        "flat1000_60_0.col",
+        "flat1000_76_0.col",
+        "latin_square.col",
+        "C2000.5.col",
+        "C4000.5.col",
     };
 
     std::ofstream log_file(log_filename, std::ios_base::app);
@@ -387,6 +570,45 @@ int main() {
 
         std::cout << "  Graph loaded: " << num_vertices_current << " vertices, " << num_edges_current << " edges." << std::endl;
         log_file << "  Graph loaded: " << num_vertices_current << " vertices, " << num_edges_current << " edges." << std::endl;
+
+        // --- Run First Fit Algorithm ---
+        std::cout << "\n  Algorithm: FF" << std::endl;
+        log_file << "\n  Algorithm: FF" << std::endl;
+        auto start_time_firstfit = std::chrono::high_resolution_clock::now();
+        int colors_used_firstfit = FirstFit_coloring(vertices_storage, num_vertices_current);
+        auto end_time_firstfit = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double, std::milli> elapsed_milliseconds_firstfit = end_time_firstfit - start_time_firstfit;
+
+        std::cout << "    Colors Used: " << colors_used_firstfit << std::endl;
+        std::cout << "    CPU Time:    " << elapsed_milliseconds_firstfit.count() << " ms" << std::endl;
+        log_file << "    Colors Used: " << colors_used_firstfit << std::endl;
+        log_file << "    CPU Time:    " << elapsed_milliseconds_firstfit.count() << " ms" << std::endl;
+
+        // --- Run Welsh-Powell Algorithm ---
+        std::cout << "\n  Algorithm: WP" << std::endl;
+        log_file << "\n  Algorithm: WP" << std::endl;
+        auto start_time_welshpowell = std::chrono::high_resolution_clock::now();
+        int colors_used_welshpowell = WelshPowell_coloring(vertices_storage, num_vertices_current);
+        auto end_time_welshpowell = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double, std::milli> elapsed_milliseconds_welshpowell = end_time_welshpowell - start_time_welshpowell;
+        
+        std::cout << "    Colors Used: " << colors_used_welshpowell << std::endl;
+        std::cout << "    CPU Time:    " << elapsed_milliseconds_welshpowell.count() << " ms" << std::endl;
+        log_file << "    Colors Used: " << colors_used_welshpowell << std::endl;
+        log_file << "    CPU Time:    " << elapsed_milliseconds_welshpowell.count() << " ms" << std::endl;
+
+        // --- Run Largest Degree Ordering Algorithm ---
+        std::cout << "\n  Algorithm: LDO" << std::endl;
+        log_file << "\n  Algorithm: LDO" << std::endl;
+        auto start_time_ldo = std::chrono::high_resolution_clock::now();
+        int colors_used_ldo = LargestDegreeOrdering_coloring(vertices_storage, num_vertices_current);
+        auto end_time_ldo = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double, std::milli> elapsed_milliseconds_ldo = end_time_ldo - start_time_ldo;
+        
+        std::cout << "    Colors Used: " << colors_used_ldo << std::endl;
+        std::cout << "    CPU Time:    " << elapsed_milliseconds_ldo.count() << " ms" << std::endl;
+        log_file << "    Colors Used: " << colors_used_ldo << std::endl;
+        log_file << "    CPU Time:    " << elapsed_milliseconds_ldo.count() << " ms" << std::endl;
 
         // --- Run IDO Algorithm ---
         std::cout << "\n  Algorithm: IDO" << std::endl;
@@ -426,6 +648,7 @@ int main() {
         std::cout << "    CPU Time:    " << elapsed_milliseconds_rlf.count() << " ms" << std::endl;
         log_file << "    Colors Used: " << colors_used_rlf << std::endl;
         log_file << "    CPU Time:    " << elapsed_milliseconds_rlf.count() << " ms" << std::endl;
+
     }
 
     // Final message to log file and console
